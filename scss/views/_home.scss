@@ -1,0 +1,57 @@
+.home{
+
+    &__presentation{
+        height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url("../media/img/home/llama-presentation.jpg");
+        background-position: center;
+        background-size: cover;
+
+        &__title{
+            font-family: 'Playfair', serif;
+            font-size: 4rem;
+            color: white;
+        }
+    }
+    
+    &__products{
+        
+        a{
+            text-decoration: none;
+        }
+        
+        .product{
+            height: 20vh;
+            
+            &__title{
+                color: white;
+                font-weight: 800;
+                border-bottom: .2em solid white;
+            }
+        }
+
+        .shoes{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 30%, 
+                rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.8) 100%),
+                url("../media/img/home/shoes.jpg");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .sport{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 30%, 
+            rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.8) 100%),
+                url("../media/img/home/sport.jpg");
+            background-position: center bottom;
+            background-size: cover;
+        }
+        
+        .casual{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 30%, 
+            rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.8) 100%),
+                url("../media/img/home/casual.jpg");
+            background-position: center 40%;
+            background-size: cover;
+        }
+    }
+}
