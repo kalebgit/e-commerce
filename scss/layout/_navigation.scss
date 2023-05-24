@@ -1,0 +1,44 @@
+
+
+.navi{
+    background-color: #EEEEEE;
+    img{
+        object-fit: contain;
+    }
+
+    &__logo{
+        height: 4vh;
+        
+    }
+
+    &__dropdown{
+        height: 3.5vh;
+        transition: all 1s;
+    }
+
+    &__user{
+        height: 3vh;
+    }
+
+    &__cart{
+        height: 3vh;
+    }
+
+    &__bar{
+        list-style-type: none;
+
+        &__link{
+            width: 30vw;
+            font-weight: bolder;
+            text-decoration: none;
+            color: #EEEEEE;
+            background-color: black;
+            border-radius: 10px;
+
+            &:active{
+                color: #EEEEEE;
+                opacity: .75;
+            }
+        }   
+    }
+}
