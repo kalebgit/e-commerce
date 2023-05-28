@@ -1,7 +1,9 @@
-
+@use '../util' as *;
 
 .navi{
-    background-color: #EEEEEE;
+    background-color: map-get($colors, primary);
+    height: 4.5rem;
+    transition: height 1s ease-in-out;
     img{
         object-fit: contain;
     }
@@ -13,32 +15,60 @@
 
     &__dropdown{
         height: 3.5vh;
+        
         transition: all 1s;
+
+        
     }
 
     &__user{
         height: 3vh;
+        cursor: pointer;
     }
 
     &__cart{
         height: 3vh;
+        cursor: pointer;
     }
 
-    &__bar{
+    
+
+    &__account{
+        display: none;
+        list-style-type: none;
+        &__item{
+            width: 30vw;
+            font-weight: bolder;
+            text-decoration: none;
+            color: map-get($colors, primary);
+            background-color: black;
+
+            cursor: pointer;
+        }
+
+        transition: all .7s;
+    }
+
+    &__bar{ 
+        display: none;
         list-style-type: none;
 
         &__link{
             width: 30vw;
             font-weight: bolder;
             text-decoration: none;
-            color: #EEEEEE;
+            color: map-get($colors, primary);
             background-color: black;
-            border-radius: 10px;
+            
 
             &:active{
-                color: #EEEEEE;
+                color: map-get($colors, primary);
                 opacity: .75;
             }
-        }   
+        }
+        
+        transition: all .7s;
     }
+
+    
 }

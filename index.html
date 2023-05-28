@@ -33,16 +33,19 @@
 </head>
 <body>
     <header class="container-fluid overflow-hidden position-sticky top-0">
-        <nav class="navi row d-flex flex-sm-column justify-content-start">
+        <nav class="navi row d-flex flex-sm-column justify-content-start align-items-start">
             <div class="navi__content col-sm-12 d-flex flex-row justify-content-between align-items-center 
                 px-3 py-2">
                 <div class="d-flex flex-row align-items-center gap-3 ">
                     <img src="./media/img/general/menu.png"
                     alt="menu desplegable"
                     class="navi__dropdown"> 
-                    <img src="./media/img/general/logo.png"
+                    <a href="./index.html">
+                        <img src="./media/img/general/logo.png"
                         alt="logo de tienda"
                         class="navi__logo">
+                    </a>
+                    
                 </div>
 
                 <div class="d-flex flex-row align-items-center gap-4">
@@ -57,13 +60,24 @@
                 
             </div>
 
+            
+            <ul class="navi__account flex-row flex-nowrap justify-content-evenly
+                        align-items-center py-3">
+                <li class="navi__account__item openLogin d-flex justify-content-center
+                align-items-center rounded-2 p-2">Inicar sesión</li>
+                <li class="navi__account__item openRegister d-flex justify-content-center
+                align-items-center rounded-2 p-2">Registrarse</li>
+            </ul>
+            
 
-            <ul class="navi__bar d-none flex-column justify-content-center
-                        align-items-center gap-3">
-                <li><a class="navi__bar__link text-center d-block p-2">Inicio</a></li>
-                <li><a class="navi__bar__link text-center d-block p-2">Calzado</a></li>
-                <li><a class="navi__bar__link text-center d-block p-2">Productos</a></li>
-                <li><a class="navi__bar__link text-center d-block p-2">Contacto</a></li>
+            
+
+            <ul class="navi__bar flex-column justify-content-center
+                        align-items-center gap-4 py-4">
+                <li><a class="navi__bar__link text-center d-block rounded-2 p-2">Inicio</a></li>
+                <li><a class="navi__bar__link text-center d-block rounded-2 p-2">Calzado</a></li>
+                <li><a class="navi__bar__link text-center d-block rounded-2 p-2">Productos</a></li>
+                <li><a class="navi__bar__link text-center d-block rounded-2 p-2">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -72,6 +86,94 @@
         <section class="home__presentation d-flex flex-row justify-content-center align-items-center">
             <h1 class="home__presentation__title">Llama</h1>
         </section>
+
+        <form action="#" method="post" class="home__form login position-fixed">
+            <fieldset class="d-flex flex-column position-relative p-4">
+                <span class="home__form__icon-close">
+                    <ion-icon name="close-outline" ></ion-icon>
+                </span>
+
+                <legend class="text-center mb-5">Bienvenido</legend>
+                
+                <div class="home__form__inputBox mb-5">
+                    <input id="user" name="user" type="text" class="inputText" required>
+                    <label for="user" class="labelText">Correo</label>
+                </div>
+                
+                <div class="home__form__inputBox mb-3">
+                    <input id="password" name="password" type="password" class="inputText" required>
+                    <label for="password" class="labelText">Contraseña</label>
+                </div>
+
+                
+
+                <div class="d-flex flex-row flex-nowrap justify-content-between align-items-center
+                                mb-4">
+                    <div class="d-flex flex-row flex-nowrap align-items-center gap-1">
+                        <input name="remind" type="checkbox" value="1">
+                        <label for="remind" class="home__form__text">Recordarme</label>  
+                    </div>
+                    
+                    <a href="" class="text-end home__form__text">Recuperar Contaseña</a>
+                </div>
+
+                <!-- <input name="login-option" type="checkbox" value="google">
+                <input name="login-option" type="checkbox" value="apple">
+                <input name="login-option" type="checkbox" value="facebook"> -->
+                
+                
+
+                <button type="submit" class="home__form__button rounded-pill mx-auto py-2 mb-3">
+                    Iniciar Sesión</button>
+
+                <span class="home__form__text">No tienes una cuenta? <span class="home__form__change
+                    text-primary openRegister" >
+                    Regístrate</span>
+                </span>
+            </fieldset>
+        </form>
+
+
+        <form action="#" method="post" class="home__form register position-fixed ">
+            <fieldset class="d-flex flex-column position-relative p-4">
+                <span class="home__form__icon-close">
+                    <ion-icon name="close-outline" ></ion-icon>
+                </span>
+
+                <legend class="text-center mb-5">Registro</legend>
+                
+                <div class="home__form__inputBox mb-5">
+                    <input id="name" name="name" type="text" class="inputText" required>
+                    <label for="name" class="labelText">Nombre</label>
+                </div>
+
+                <div class="home__form__inputBox mb-5">
+                    <input id="email" name="email" type="mail" class="inputText" required>
+                    <label for="email" class="labelText">Correo</label>
+                </div>
+
+                <div class="home__form__inputBox mb-5">
+                    <input id="user" name="user" type="text" class="inputText" required>
+                    <label for="user" class="labelText">Contraseña</label>
+                </div>
+                
+                <div class="home__form__inputBox mb-5">
+                    <input id="password" name="password" type="password" class="inputText" required>
+                    <label for="password" class="labelText">Repetir Contraseña</label>
+                </div>
+
+                <!-- <input name="login-option" type="checkbox" value="google">
+                <input name="login-option" type="checkbox" value="apple">
+                <input name="login-option" type="checkbox" value="facebook"> -->
+
+                <button type="submit" class="home__form__button rounded-pill mx-auto py-2 mb-3">
+                    Crear Cuenta</button>
+
+                <span class="home__form__text">Ya tienes una cuenta? <span class="home__form__change
+                    text-primary openLogin">Inicia Sesión</span>
+                </span>
+            </fieldset>
+        </form>
 
         <section class="home__products d-flex flex-column justify-content-start pt-2">
             <h2 class="fs-2 text-center">Lo mejor</h2>
@@ -140,7 +242,11 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
         crossorigin="anonymous"></script>
 
+    <!--ion icons-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <!--my javascript-->
-    <script src="./js/index.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>

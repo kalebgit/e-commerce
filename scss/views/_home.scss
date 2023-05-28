@@ -1,3 +1,5 @@
+@use '../util' as *;
+
 .home{
 
     &__presentation{
@@ -12,6 +14,98 @@
             font-size: 4rem;
             color: white;
         }
+    }
+
+    &__form{
+        z-index: 99;
+        background-color: map-get($colors, primary);
+        width: 70vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+
+        box-shadow: 0 0 1em .01em rgba(0, 0, 0, 0.7);
+
+        transition: .4s ease-out;
+        legend{
+            font-weight: 800;
+        }
+
+        &__inputBox{
+            position: relative;
+            width: 100%;
+            border-bottom: 2px solid black;
+
+            .labelText{
+                color: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                left: 0;
+                bottom: 10%;
+                pointer-events: none;
+
+                transition: all .7s ease;
+            }
+    
+            .inputText{
+                background-color: map-get($colors, primary);
+                width: 100%;
+                height: 100%;
+                outline: none;
+                border: none;
+
+                &:valid ~ .labelText,
+                &:focus ~ .labelText
+                {
+                    bottom: 100%;
+                    
+                    transform: scale(.8) translateX(-.5em);
+                }   
+
+                
+            }
+
+            
+        }
+
+        &__text{
+            text-decoration: none;
+            color: map-get($colors, tertiary);
+            font-size: .8rem;
+        }
+        
+        
+
+        &__change{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        &__button{
+            width: 100%;
+            border: none;
+            outline: none;
+            font-weight: 700;
+            background-color: map-get($colors, tertiary);
+            color: map-get($colors, primary);
+        }
+
+        &__icon-close{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 2rem;
+            width: 2rem;
+            background: map-get($colors, secondary);
+            font-size: 1.5em;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+        }
+        
     }
     
     &__products{

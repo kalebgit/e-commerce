@@ -1,0 +1,23 @@
+.rotate{
+    transform: rotate(.25turn);
+}
+
+.appear{
+    display: flex;
+}
+
+.expand{
+    height: 100vh !important;
+}
+
+.popup{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.sub-menu{
+    height: 13vh;
+}
+
+.disabled{
+    pointer-events: none;
+}
