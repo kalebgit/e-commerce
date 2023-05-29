@@ -1,0 +1,75 @@
+@use '../util' as *;
+
+.store{
+    &__presentation{
+        height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url("../media/img/store/clothes.jpg");
+        background-position: center;
+        background-size: cover;
+
+        &__title{
+            @include main-title();
+        }
+    }
+
+    &__options{
+        &__list{
+            list-style-type: none;
+        }
+
+        &__item{
+            outline: none;
+            background-color: #EA2C62;
+            color: white;
+        }
+
+        &__item-pressed{
+            background-color: #a92e51;
+        }
+    }
+
+    &__products{
+
+        &__product{
+            height: 35vh;
+            width: 45vw;
+
+            &__image{
+                width: 100%;
+                object-fit: cover;
+            }
+
+            &__content{
+                width: 100%;
+            }
+
+            &__price{
+                font-family: 'Archivo', sans-serif;
+                font-weight: 800;
+                color: map-get($colors, secondary);
+                background-color: map-get($colors, primary);
+                border: 3px solid white;
+                bottom: 5%;
+                left: 5%;
+            }
+
+            &__like{
+                transform: scale(1.4);
+                top: 15px;
+                right: 15px;
+
+                cursor: pointer;
+            }
+
+            &__title{
+                font-size: 1rem;
+                font-weight: 800;
+            }
+
+            &__description{
+                font-size: .9rem;
+            }
+        }
+    }
+}

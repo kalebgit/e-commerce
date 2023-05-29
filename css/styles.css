@@ -189,6 +189,62 @@ footer ul a {
   background-size: cover;
 }
 
+.store__presentation {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../media/img/store/clothes.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.store__presentation__title {
+  font-family: "Playfair", serif;
+  font-size: 4rem;
+  color: white;
+}
+.store__options__list {
+  list-style-type: none;
+}
+.store__options__item {
+  outline: none;
+  background-color: #EA2C62;
+  color: white;
+}
+.store__options__item-pressed {
+  background-color: #a92e51;
+}
+.store__products__product {
+  height: 35vh;
+  width: 45vw;
+}
+.store__products__product__image {
+  width: 100%;
+  object-fit: cover;
+}
+.store__products__product__content {
+  width: 100%;
+}
+.store__products__product__price {
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
+  color: black;
+  background-color: #EEEEEE;
+  border: 3px solid white;
+  bottom: 5%;
+  left: 5%;
+}
+.store__products__product__like {
+  transform: scale(1.4);
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+.store__products__product__title {
+  font-size: 1rem;
+  font-weight: 800;
+}
+.store__products__product__description {
+  font-size: 0.9rem;
+}
+
 .rotate {
   transform: rotate(0.25turn);
 }

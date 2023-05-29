@@ -10,9 +10,7 @@
         background-size: cover;
 
         &__title{
-            font-family: 'Playfair', serif;
-            font-size: 4rem;
-            color: white;
+            @include main-title();
         }
     }
 
