@@ -1,0 +1,79 @@
+.cart{
+
+    background-color: #F1F6F9;
+    &__products{
+
+
+        &__product{
+            height: 15vh;
+            width: 100%;
+
+            &__image{
+                height: 100%;
+                width: 30%;
+                object-fit: contain;
+                object-position: center;
+
+                box-shadow: .01em 0 .1em 0 rgba(0, 0, 0, 0.1), 
+                    0 0 2em 0 rgba(0, 0, 0, 0.1);
+            }
+
+            &__content{
+                
+                width: 50%;
+
+                &__title{
+                    font-size: 1.1rem;
+                }
+
+                &__text{
+                    font-size: .9rem;
+                }
+
+                &__price{
+                    font-family: 'Anton', sans-serif;
+                    font-size: 1.3rem;
+                    letter-spacing: .05em;
+                }
+            }
+
+            &__options{
+                
+                &__button{
+                    background-color: black;
+                    color: white;
+                    outline: none;
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 100%;
+                    border: none;
+                    outline: none;
+
+                    box-shadow: 0 .3em .3em 0 rgba(0, 0, 0, 0.1);
+
+                    font-size: 1.1rem;
+                    font-family:sans-serif;
+
+                    &--white{
+                        background-color: white;
+                        color: black;
+                        border: 2px solid black;
+                    }
+                }
+
+                &__text{
+                    font-family: 'Anton', sans-serif;
+                    font-size: 1.3rem;
+                }
+            }
+
+            &__remove{
+                top:0;
+                right:0;
+                font-size: 1.8rem;
+
+                cursor: pointer;
+            }
+        }
+    }
+}

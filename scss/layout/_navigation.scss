@@ -31,6 +31,20 @@
         cursor: pointer;
     }
 
+    &__count{
+        width: 1.4em;
+        height: 1.4em;
+        bottom: 50%;
+        left: 60%;
+        font-size: 1rem;
+        background-color: #F45050;
+        color: white;
+        border-radius: 100%;
+
+        transform: scale(0);
+        transition: all .3s;
+    }
+
     
 
     &__account{

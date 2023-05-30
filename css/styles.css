@@ -35,6 +35,18 @@ header {
   height: 3vh;
   cursor: pointer;
 }
+.navi__count {
+  width: 1.4em;
+  height: 1.4em;
+  bottom: 50%;
+  left: 60%;
+  font-size: 1rem;
+  background-color: #F45050;
+  color: white;
+  border-radius: 100%;
+  transform: scale(0);
+  transition: all 0.3s;
+}
 .navi__account {
   display: none;
   list-style-type: none;
@@ -245,6 +257,63 @@ footer ul a {
   font-size: 0.9rem;
 }
 
+.cart {
+  background-color: #F1F6F9;
+}
+.cart__products__product {
+  height: 15vh;
+  width: 100%;
+}
+.cart__products__product__image {
+  height: 100%;
+  width: 30%;
+  object-fit: contain;
+  object-position: center;
+  box-shadow: 0.01em 0 0.1em 0 rgba(0, 0, 0, 0.1), 0 0 2em 0 rgba(0, 0, 0, 0.1);
+}
+.cart__products__product__content {
+  width: 50%;
+}
+.cart__products__product__content__title {
+  font-size: 1.1rem;
+}
+.cart__products__product__content__text {
+  font-size: 0.9rem;
+}
+.cart__products__product__content__price {
+  font-family: "Anton", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+}
+.cart__products__product__options__button {
+  background-color: black;
+  color: white;
+  outline: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  box-shadow: 0 0.3em 0.3em 0 rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  font-family: sans-serif;
+}
+.cart__products__product__options__button--white {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+.cart__products__product__options__text {
+  font-family: "Anton", sans-serif;
+  font-size: 1.3rem;
+}
+.cart__products__product__remove {
+  top: 0;
+  right: 0;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
 .rotate {
   transform: rotate(0.25turn);
 }
@@ -267,6 +336,10 @@ footer ul a {
 
 .disabled {
   pointer-events: none;
+}
+
+.pop {
+  transform: scale(1);
 }
 
 /*# sourceMappingURL=styles.css.map */
