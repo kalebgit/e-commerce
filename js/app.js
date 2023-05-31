@@ -79,6 +79,7 @@ class Product{
         this.price = price;
         this.stars = stars;
         this.image = image;
+        this.quantity = 0;
     }
 }
 
@@ -324,9 +325,11 @@ function printProducts(){
                                     <em>${item.brand}</em></p>
                                 <p class="store__products__product__description m-0">
                                     ${item.description}</p>
-                                <p class="store__products__product__description m-0">
+                                <p class="store__products__product__description mb-4">
                                     ${item.stars}</p>
-                                
+                                <span class="store__products__product__button add-cart d-inline-block rounded-pill fw-bolder px-3 py-2 mx-auto " 
+                                    id="${item.id}">
+                                    🛒 Comprar</span>
                             </div>`
     
         productsContainer.insertAdjacentElement('beforeend', element);
@@ -342,6 +345,37 @@ function printProducts(){
 */
 
 let cart = new Array();
+
+let addCart = [...document.querySelectorAll(".add-cart")];  
+
+addCart.forEach((item)=>{
+    item.addEventListener('click', (e)=>{
+        let product = products.find((element)=>{
+            if(parseInt(item.getAttribute("id")) === element.id){
+                return element;
+            }
+        });
+
+        console.log(product);
+
+        if(product.quantity > 0){
+            product.quantity++;
+        }else{
+            product.quantity++;
+            cart.unshift(product);
+        }
+        
+        let quantityCart = document.querySelector(".navi__count");
+        quantityCart.classList.add("pop");
+        if(cart.length > 0){
+            quantityCart.textContent = "" + cart.reduce((sum, element)=>{
+                return sum += element.quantity;
+            }, 0);
+        }
+    });
+});
+
+
 
 
 /*
@@ -399,6 +433,5 @@ likeButton.forEach((item)=>{
         }
     });
 });
-
 
 
