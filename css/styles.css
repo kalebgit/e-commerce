@@ -14,30 +14,30 @@ header {
 
 .navi {
   background-color: #EEEEEE;
-  height: 4.5rem;
+  height: 7vh;
   transition: height 1s ease-in-out;
 }
 .navi img {
   object-fit: contain;
 }
 .navi__logo {
-  height: 4vh;
+  height: 5vh;
 }
 .navi__dropdown {
-  height: 3.5vh;
+  height: 4.5vh;
   transition: all 1s;
 }
 .navi__user {
-  height: 3vh;
+  height: 4vh;
   cursor: pointer;
 }
 .navi__cart {
-  height: 3vh;
+  height: 4vh;
   cursor: pointer;
 }
 .navi__count {
-  width: 1.4em;
-  height: 1.4em;
+  width: 1.6em;
+  height: 1.6em;
   bottom: 50%;
   left: 60%;
   font-size: 1rem;
@@ -224,7 +224,7 @@ footer ul a {
   background-color: #a92e51;
 }
 .store__products__product {
-  height: 35vh;
+  height: 60vh;
   width: 45vw;
 }
 .store__products__product__image {
@@ -255,6 +255,13 @@ footer ul a {
 }
 .store__products__product__description {
   font-size: 0.9rem;
+}
+.store__products__product__button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: #F7F1E5;
 }
 
 .cart {

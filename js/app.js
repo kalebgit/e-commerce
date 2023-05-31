@@ -79,6 +79,7 @@ class Product{
         this.price = price;
         this.stars = stars;
         this.image = image;
+        this.quantity = 0;
     }
 }
 
@@ -98,7 +99,7 @@ new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por defini
     "../media/img/store/products/sudadera-puma-easter.jpg"),
 new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
     "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
-new Product(109, "Tenis Adidas Nizza Platform Mid x Hello Kitty", "DAMAS", "", 2199, "por definir", 
+new Product(109, "Tenis Adidas Nizza Platform Mid x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
     "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
 new Product(110, "Gorra New Era Yankees Sakura gFifty", "CABALLEROS", "NEW ERA", 1049, "por definir",
     "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
@@ -108,7 +109,7 @@ new Product(112, "Sudadera Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "po
     "../media/img/store/products/sudadera-puma-ragged-priest.jpg"),]
 
 
-let productsContainer = document.querySelector(".store__products");
+let storeProductsContainer = document.querySelector(".store__products");
 
 
 
@@ -133,6 +134,10 @@ let optionButtons = [...document.querySelectorAll(".store__options__item")];
 let filteredProducts = new Array();
 
 let button;
+
+resetProducts(storeProductsContainer);
+filterStoreProducts();
+printStoreProducts();
 
 optionButtons.forEach((item)=>{
     item.addEventListener('click', (e)=>{
@@ -213,19 +218,15 @@ optionButtons.forEach((item)=>{
             }
         }
 
-        resetProducts();
-        filterProducts();
-        printProducts();
+        resetProducts(storeProductsContainer);
+        filterStoreProducts();
+        printStoreProducts();
     });
 });
 
-window.addEventListener('load', (e)=>{
-    resetProducts();
-    filterProducts();
-    printProducts();
-});
 
-function filterProducts(){
+
+function filterStoreProducts(){
     if(options.all){
         console.log("se ingresa a all");
         filteredProducts = products;
@@ -286,14 +287,14 @@ function filterProducts(){
     }
 }
 
-function resetProducts(){
-    let containerChildren = [...productsContainer.children]
+function resetProducts(parentContainer){
+    let containerChildren = [...parentContainer.children]
     containerChildren.forEach((item)=>{
         item.remove();
     });
 }
 
-function printProducts(){
+function printStoreProducts(){
     lastProducts = new Array();
     filteredProducts.forEach((item)=>{
         if(item != undefined){
@@ -304,7 +305,7 @@ function printProducts(){
     lastProducts.forEach((item)=>{
         let element = document.createElement("article");
         element.className = "store__products__product d-flex flex-column flex-nowrap justify-content-start" +
-            "align-items-start gap-0 ";
+            "align-items-start gap-2 ";
     
         element.innerHTML = `<div class="position-relative">
                                 <img src="${item.image}" 
@@ -324,12 +325,14 @@ function printProducts(){
                                     <em>${item.brand}</em></p>
                                 <p class="store__products__product__description m-0">
                                     ${item.description}</p>
-                                <p class="store__products__product__description m-0">
+                                <p class="store__products__product__description mb-4">
                                     ${item.stars}</p>
-                                
+                                <span class="store__products__product__button add-cart d-inline-block rounded-pill fw-bolder px-3 py-2 mx-auto" 
+                                    id="${item.id}">
+                                    🛒 Comprar</span>
                             </div>`
     
-        productsContainer.insertAdjacentElement('beforeend', element);
+        storeProductsContainer.insertAdjacentElement('beforeend', element);
     })
 }
 
@@ -342,6 +345,110 @@ function printProducts(){
 */
 
 let cart = new Array();
+
+let cartProductsContainer = document.querySelector(".cart__products")
+cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-content-start align-items-center";
+
+let addCart = [...document.querySelectorAll(".add-cart")]; 
+
+
+
+addCart.forEach((item)=>{
+    item.addEventListener('click', (e)=>{
+        let product = products.find((element)=>{
+            if(parseInt(item.getAttribute("id")) === element.id){
+                return element;
+            }
+        });
+
+        console.log(product);
+
+        if(product.quantity > 0){
+            product.quantity++;
+        }else{
+            product.quantity++;
+            cart.unshift(product);
+        }
+        
+        let quantityCart = document.querySelector(".navi__count");
+        quantityCart.classList.add("pop");
+        if(cart.length > 0){
+            quantityCart.textContent = "" + cart.reduce((sum, element)=>{
+                return sum += element.quantity;
+            }, 0);
+        }
+    });
+});
+
+resetProducts(cartProducts);
+filterCartProducts();
+printCartProducts();
+
+
+let removeButtons = document.querySelector(".remove-cart");
+
+removeButtons.forEach((item)=>{
+    item.addEventListener('click', (e)=>{
+        resetProducts(cartProducts);
+
+        filterCartProducts();
+
+        printCartProducts();
+    });
+});
+
+function filterCartProducts(){
+    cart.map((element)=>{
+        if(element.id === parseInt(item.getAttribute("id"))){
+            element.quantity--;
+            if(element.quantity > 0){
+                return element;
+            }
+        }
+    });
+}
+
+function printCartProducts(){
+    lastProducts = new Array();
+    cart.forEach((item)=>{
+        if(item != undefined){
+            lastProducts.push(item);
+        }
+    })
+
+    lastProducts.forEach((item)=>{
+        let element = document.createElement("article");
+        element.className = "cart__products__product d-flex flex-row flex-nowrap justify-content-start align-items-start position-relative p-4 gap-4";
+    
+        element.innerHTML = `
+        <img src="${cartProduct.image}"
+    alt="${cartProduct.model}"
+    class="cart__products__product__image img-thumbnail">
+    <div class="cart__products__product__content d-flex flex-column flex-nowrap 
+        justify-content-start align-items-start">
+            <h2 class="cart__products__product__content__title fw-bolder">${cartPorduct.model}</h2>
+            <p class="cart__products__product__content__text">${cartProduct.brand} - ${cartProduct.description}</p>
+            <p class="cart__products__product__content__price ">$${cartProduct.price}</p>
+    </div>
+    <div class="cart__products__product__options align-self-end d-flex flex-row
+        flex-nowrap justify-content-center gap-3">
+            <button id="" class="cart__products__product__options__button 
+                cart__products__product__options__button--white fw-bolder
+                d-flex justify-content-center align-items-center add-quantity">–</button>
+            <p class="cart__products__product__options__text">${cartProduct.quantity}</p>
+            <button id="remove" class="cart__products__product__options__button fw-bolder
+                d-flex justify-content-center align-items-center remove-quantity">
+                +</button>
+    </div>
+
+    <ion-icon name="close-outline" id="${cartProduct.id}" class="position-absolute 
+        cart__products__product__remove p-4 remove-cart"></ion-icon>`
+    
+        cartProductsContainer.insertAdjacentElement('beforeend', element);
+    })
+}
+
+//variables que apuntan a nodos de diferentes paginas   
 
 
 /*
@@ -399,6 +506,5 @@ likeButton.forEach((item)=>{
         }
     });
 });
-
 
 
