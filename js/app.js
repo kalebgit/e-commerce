@@ -124,13 +124,3 @@ function resetProducts(parentContainer){
         item.remove();
     });
 }
-
-
-
-
-
-
-//variables que apuntan a nodos de diferentes paginas   
-
-
-
