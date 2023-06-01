@@ -267,6 +267,9 @@ footer ul a {
 .cart {
   background-color: #F1F6F9;
 }
+.cart__products__message {
+  font-size: 2rem;
+}
 .cart__products__product {
   height: 15vh;
   width: 100%;
@@ -338,7 +341,7 @@ footer ul a {
 }
 
 .sub-menu {
-  height: 13vh;
+  height: 17vh;
 }
 
 .disabled {
@@ -347,6 +350,10 @@ footer ul a {
 
 .pop {
   transform: scale(1);
+}
+
+.full-screen {
+  height: 100vh;
 }
 
 /*# sourceMappingURL=styles.css.map */

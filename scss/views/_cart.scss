@@ -3,6 +3,9 @@
     background-color: #F1F6F9;
     &__products{
 
+        &__message{
+            font-size: 2rem;
+        }
 
         &__product{
             height: 15vh;
