@@ -2,19 +2,19 @@
 
 .navi{
     background-color: map-get($colors, primary);
-    height: 4.5rem;
+    height: 7vh;
     transition: height 1s ease-in-out;
     img{
         object-fit: contain;
     }
 
     &__logo{
-        height: 4vh;
+        height: 5vh;
         
     }
 
     &__dropdown{
-        height: 3.5vh;
+        height: 4.5vh;
         
         transition: all 1s;
 
@@ -22,18 +22,18 @@
     }
 
     &__user{
-        height: 3vh;
+        height: 4vh;
         cursor: pointer;
     }
 
     &__cart{
-        height: 3vh;
+        height: 4vh;
         cursor: pointer;
     }
 
     &__count{
-        width: 1.4em;
-        height: 1.4em;
+        width: 1.6em;
+        height: 1.6em;
         bottom: 50%;
         left: 60%;
         font-size: 1rem;
