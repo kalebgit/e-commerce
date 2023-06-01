@@ -327,7 +327,11 @@ function printStoreProducts(){
                                     ${item.description}</p>
                                 <p class="store__products__product__description mb-4">
                                     ${item.stars}</p>
+<<<<<<< HEAD
                                 <span class="store__products__product__button add-cart d-inline-block rounded-pill fw-bolder px-3 py-2 mx-auto" 
+=======
+                                <span class="store__products__product__button add-cart d-inline-block rounded-pill fw-bolder px-3 py-2 mx-auto " 
+>>>>>>> c6076fbb7a58dfeca9f7ee0bf57b5a4343fe6f0f
                                     id="${item.id}">
                                     🛒 Comprar</span>
                             </div>`
@@ -350,8 +354,6 @@ let cartProductsContainer = document.querySelector(".cart__products")
 cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-content-start align-items-center";
 
 let addCart = [...document.querySelectorAll(".add-cart")]; 
-
-
 
 addCart.forEach((item)=>{
     item.addEventListener('click', (e)=>{
@@ -379,6 +381,7 @@ addCart.forEach((item)=>{
         }
     });
 });
+
 
 resetProducts(cartProducts);
 filterCartProducts();
@@ -449,7 +452,6 @@ function printCartProducts(){
 }
 
 //variables que apuntan a nodos de diferentes paginas   
-
 
 /*
     ==========================================
