@@ -71,7 +71,7 @@ openLogin.forEach((item)=>{
     ==========================================
 */
 class Product{
-    constructor(id, model, description, brand,  price, stars, image){
+    constructor(id, model, description, brand,  price, stars, image, quantity = 0){
         this.id = id;
         this.model = model;
         this.description = description;
@@ -79,7 +79,16 @@ class Product{
         this.price = price;
         this.stars = stars;
         this.image = image;
-        this.quantity = 0;
+        this.quantity = quantity;
+    }
+
+    equals(otherProduct){
+        return (this.id == otherProduct.id);
+    }
+
+    clone(){
+        return new Product(this.id, this.model, this.description, this.brand, 
+            this.price, this.stars, this.image);
     }
 }
 
@@ -99,9 +108,9 @@ new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por defini
     "../media/img/store/products/sudadera-puma-easter.jpg"),
 new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
     "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
-new Product(109, "Tenis Adidas Nizza Platform Mid x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
+new Product(109, "Tenis Adidas Nizza x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
     "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
-new Product(110, "Gorra New Era Yankees Sakura gFifty", "CABALLEROS", "NEW ERA", 1049, "por definir",
+new Product(110, "Gorra New Era Yankees Sakura", "CABALLEROS", "NEW ERA", 1049, "por definir",
     "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
 new Product(111, "Sudadera Puma Classics Gen", "NIÑOS", "PUMA", 1149, "por definir", 
     "../media/img/store/products/sudadera-puma-classics-gen.jpg"), 
@@ -117,10 +126,22 @@ let wishList = new Array();
 let cart = new Array();
 
 
+displayCartCount();
+
 
 function resetProducts(parentContainer){
     let containerChildren = [...parentContainer.children]
     containerChildren.forEach((item)=>{
         item.remove();
     });
+}
+
+function displayCartCount(){
+    if(cart.length > 0){
+        let quantityCart = document.querySelector(".navi__count");
+        quantityCart.classList.add("pop");    
+        quantityCart.textContent = "" + cart.reduce((sum, element)=>{
+            return sum += element.quantity;
+        }, 0);
+    }
 }

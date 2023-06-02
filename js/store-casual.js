@@ -24,6 +24,7 @@ let button;
 resetProducts(storeProductsContainer);
 filterStoreProducts();
 printStoreProducts();
+activeButtons();
 
 optionButtons.forEach((item)=>{
     item.addEventListener('click', (e)=>{
@@ -107,6 +108,7 @@ optionButtons.forEach((item)=>{
         resetProducts(storeProductsContainer);
         filterStoreProducts();
         printStoreProducts();
+        activeButtons();
     });
 });
 
@@ -216,91 +218,91 @@ function printStoreProducts(){
 }
 
 
+function activeButtons(){
+    /*
+        ==============================
+            WISHLIST
+        ==============================
+    */
+    let likeButton = [...document.querySelectorAll(".store__products__product__like")];
 
-/*
-    ==============================
-        WISHLIST
-    ==============================
-*/
-let likeButton = [...document.querySelectorAll(".store__products__product__like")];
+    likeButton.forEach((item)=>{
+        item.addEventListener('click', (e)=>{
+            console.log("hiciste click");
 
-likeButton.forEach((item)=>{
-    item.addEventListener('click', (e)=>{
-        console.log("hiciste click");
+            if(item.children[0].getAttribute("name") === "heart" &&
+                item.children[0].className.includes("opacity-50")){
+                
+                item.children[0].classList.remove("opacity-50");
+                item.children[0].classList.add("opacity-100");
+            }else{
+                item.children[0].setAttribute("name", "heart-outline");
+                item.children[0].classList.remove("opacity-100");
+                item.children[0].classList.remove("opacity-50");
+            }
+        });
+        
+        item.addEventListener('mouseenter', (e)=>{
+            console.log("entraste al elemento");
 
-        if(item.children[0].getAttribute("name") === "heart" &&
-            item.children[0].className.includes("opacity-50")){
-            
-            item.children[0].classList.remove("opacity-50");
-            item.children[0].classList.add("opacity-100");
-        }else{
-            item.children[0].setAttribute("name", "heart-outline");
-            item.children[0].classList.remove("opacity-100");
-            item.children[0].classList.remove("opacity-50");
-        }
-    });
-    
-    item.addEventListener('mouseenter', (e)=>{
-        console.log("entraste al elemento");
+            console.log("mouseenter");
+            if(item.children[0].getAttribute("name") === "heart-outline"){
 
-        console.log("mouseenter");
-        if(item.children[0].getAttribute("name") === "heart-outline"){
+                item.children[0].setAttribute("name", "heart");
+                item.children[0].classList.add("opacity-50");
 
-            item.children[0].setAttribute("name", "heart");
-            item.children[0].classList.add("opacity-50");
+            }else if(item.children[0].getAttribute("name") === "heart" &&
+                item.children[0].className.includes("opacity-100")){
 
-        }else if(item.children[0].getAttribute("name") === "heart" &&
-            item.children[0].className.includes("opacity-100")){
-
-            item.children[0].setAttribute("name", "heart-dislike");
-        }
-    });
-
-    item.addEventListener('mouseleave', (e)=>{
-        console.log("saliste del elemento");
-        console.log("mouseleave");
-        if(item.children[0].getAttribute("name") === "heart" && 
-            item.children[0].className.includes("opacity-50")){
-            
-            item.children[0].setAttribute("name", "heart-outline");
-        }else if(item.children[0].getAttribute("name") === "heart-dislike"){
-            
-            item.children[0].setAttribute("name", "heart")
-        }
-    });
-});
-
-/*
-    ==========================================
-        CART
-    ==========================================
-*/
-
-let addCart = [...document.querySelectorAll(".add-cart")]; 
-
-addCart.forEach((item)=>{
-    item.addEventListener('click', (e)=>{
-        let product = products.find((element)=>{
-            if(parseInt(item.getAttribute("id")) === element.id){
-                return element;
+                item.children[0].setAttribute("name", "heart-dislike");
             }
         });
 
-        console.log(product);
-
-        if(product.quantity > 0){
-            product.quantity++;
-        }else{
-            product.quantity++;
-            cart.unshift(product);
-        }
-        
-        let quantityCart = document.querySelector(".navi__count");
-        quantityCart.classList.add("pop");
-        if(cart.length > 0){
-            quantityCart.textContent = "" + cart.reduce((sum, element)=>{
-                return sum += element.quantity;
-            }, 0);
-        }
+        item.addEventListener('mouseleave', (e)=>{
+            console.log("saliste del elemento");
+            console.log("mouseleave");
+            if(item.children[0].getAttribute("name") === "heart" && 
+                item.children[0].className.includes("opacity-50")){
+                
+                item.children[0].setAttribute("name", "heart-outline");
+            }else if(item.children[0].getAttribute("name") === "heart-dislike"){
+                
+                item.children[0].setAttribute("name", "heart")
+            }
+        });
     });
-});
+
+    /*
+        ==========================================
+            CART
+        ==========================================
+    */
+
+    let addCart = [...document.querySelectorAll(".add-cart")]; 
+
+    addCart.forEach((item)=>{
+        item.addEventListener('click', (e)=>{
+            let newCartProduct = products.find((element)=>{
+                if(parseInt(item.getAttribute("id")) === element.id){
+                    return element;
+                }
+            }).clone();
+
+            
+
+            if(cart.some((product)=>newCartProduct.equals(product))){
+                cart.forEach((product)=>{
+                    if(newCartProduct.equals(product)){
+                        product.quantity++;
+                    }
+                });
+            }else{
+                newCartProduct.quantity++;
+                cart.unshift(newCartProduct);
+            }
+            
+            displayCartCount();
+        });
+    });
+}
+
