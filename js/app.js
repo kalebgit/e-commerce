@@ -126,8 +126,15 @@ let wishList = new Array();
 let cart = new Array();
 
 
-displayCartCount();
+window.addEventListener('beforeunload', ()=>{
+    saveCart(cart);
+});
 
+window.addEventListener('load', ()=>{
+    cart = getCart();
+    console.log(cart);
+    displayCartCount();
+})
 
 function resetProducts(parentContainer){
     let containerChildren = [...parentContainer.children]
@@ -144,4 +151,32 @@ function displayCartCount(){
             return sum += element.quantity;
         }, 0);
     }
+}
+
+
+//cart functions
+
+function saveCart(updatedCart){
+    console.log(updatedCart);
+    sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+}
+
+function getCart(){
+    let cartWithRealProducts = [];
+
+    let cartWithObjects = JSON.parse(sessionStorage.getItem("cart"));
+
+    cartWithObjects?.forEach((element)=>{
+        cartWithRealProducts.push(parseToProduct(element));
+    });
+
+    return cartWithRealProducts || new Array();
+}
+
+//id, model, description, brand,  price, stars, image, quantity = 0
+function parseToProduct({id, model, description, brand, price, stars,
+    image, quantity}){
+    
+    return new Product(id, model, description, brand, price, stars,
+            image, quantity)
 }

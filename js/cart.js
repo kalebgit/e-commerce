@@ -4,24 +4,23 @@
     ==========================================
 */
 
-
 let cartProductsContainer = document.querySelector(".cart__products")
 cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-content-start align-items-center";
 
 let removeButtons = document.querySelector(".remove-cart");
 
 if(cart.length > 0){
-    resetProducts(cartProductsContainer);
-    filterCartProducts();
     printCartProducts();
 
     removeButtons.forEach((item)=>{
         item.addEventListener('click', (e)=>{
             resetProducts(cartProducts);
     
-            filterCartProducts();
+            filterCartProducts(item);
     
             printCartProducts();
+
+            displayNumberOfProducts();
         });
     });
 }else{
@@ -43,9 +42,9 @@ if(cart.length > 0){
 
 
 
-function filterCartProducts(){
+function filterCartProducts(node){
     cart.map((element)=>{
-        if(element.id === parseInt(item.getAttribute("id"))){
+        if(element.id === parseInt(node.getAttribute("id"))){
             element.quantity--;
             if(element.quantity > 0){
                 return element;
@@ -55,6 +54,7 @@ function filterCartProducts(){
 }
 
 function printCartProducts(){
+    cart = getCart();
     lastProducts = new Array();
     cart.forEach((item)=>{
         if(item != undefined){
