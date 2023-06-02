@@ -9,41 +9,35 @@ cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-conten
 
 let removeButtons = document.querySelector(".remove-cart");
 
-if(cart.length > 0){
-    printCartProducts();
-
-    removeButtons.forEach((item)=>{
-        item.addEventListener('click', (e)=>{
-            resetProducts(cartProducts);
+window.addEventListener('load', ()=>{
+    if(cart.length > 0){
+        printCartProducts();
     
-            filterCartProducts(item);
-    
-            printCartProducts();
-
-            displayNumberOfProducts();
+        removeButtons.forEach((item)=>{
+            item.addEventListener('click', (e)=>{
+                resetProducts(cartProducts);
+        
+                filterCartProducts(item);
+        
+                printCartProducts();
+            });
         });
-    });
-}else{
-    let page = document.querySelector(".cart");
-
-    page.classList.add("full-screen");
-
-    let message = document.createElement("p");
-    message.className = "cart__products__message fw-bolder p-5";
-    message.textContent = "No tienes productos en el carrito ♦️♦️♦️ 🤔";
+    }else{
+        let page = document.querySelector(".cart");
     
-    page.insertAdjacentElement('afterbegin', message);
-}
-
-
-
-
-
-
+        page.classList.add("full-screen");
+    
+        let message = document.createElement("p");
+        message.className = "cart__products__message fw-bolder p-5";
+        message.textContent = "No tienes productos en el carrito ♦️♦️♦️ 🤔";
+        
+        page.insertAdjacentElement('afterbegin', message);
+    }
+})
 
 
 function filterCartProducts(node){
-    cart.map((element)=>{
+    cart = cart.map((element)=>{
         if(element.id === parseInt(node.getAttribute("id"))){
             element.quantity--;
             if(element.quantity > 0){
@@ -54,15 +48,7 @@ function filterCartProducts(node){
 }
 
 function printCartProducts(){
-    cart = getCart();
-    lastProducts = new Array();
-    cart.forEach((item)=>{
-        if(item != undefined){
-            lastProducts.push(item);
-        }
-    })
-
-    lastProducts.forEach((item)=>{
+    cart.forEach((cartProduct)=>{
         let element = document.createElement("article");
         element.className = "cart__products__product d-flex flex-row flex-nowrap justify-content-start align-items-start position-relative p-4 gap-4";
     
@@ -71,10 +57,10 @@ function printCartProducts(){
     alt="${cartProduct.model}"
     class="cart__products__product__image img-thumbnail">
     <div class="cart__products__product__content d-flex flex-column flex-nowrap 
-        justify-content-start align-items-start">
-            <h2 class="cart__products__product__content__title fw-bolder">${cartPorduct.model}</h2>
-            <p class="cart__products__product__content__text">${cartProduct.brand} - ${cartProduct.description}</p>
-            <p class="cart__products__product__content__price ">$${cartProduct.price}</p>
+        justify-content-between align-items-start">
+            <h2 class="cart__products__product__content__title fw-bolder m-0">${cartProduct.model}</h2>
+            <p class="cart__products__product__content__text m-0">${cartProduct.brand} - ${cartProduct.description}</p>
+            <p class="cart__products__product__content__price m-0">$${cartProduct.price}</p>
     </div>
     <div class="cart__products__product__options align-self-end d-flex flex-row
         flex-nowrap justify-content-center gap-3">

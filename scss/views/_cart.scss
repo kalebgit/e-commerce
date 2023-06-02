@@ -8,7 +8,7 @@
         }
 
         &__product{
-            height: 15vh;
+            height: 17vh;
             width: 100%;
 
             &__image{
@@ -22,20 +22,20 @@
             }
 
             &__content{
-                
+                height: 100%;
                 width: 50%;
 
                 &__title{
-                    font-size: 1.1rem;
+                    font-size: .9rem;
                 }
 
                 &__text{
-                    font-size: .9rem;
+                    font-size: .7rem;
                 }
 
                 &__price{
                     font-family: 'Anton', sans-serif;
-                    font-size: 1.3rem;
+                    font-size: 1rem;
                     letter-spacing: .05em;
                 }
             }
@@ -73,7 +73,7 @@
             &__remove{
                 top:0;
                 right:0;
-                font-size: 1.8rem;
+                font-size: 1.5rem;
 
                 cursor: pointer;
             }

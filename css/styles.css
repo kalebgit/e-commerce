@@ -271,7 +271,7 @@ footer ul a {
   font-size: 2rem;
 }
 .cart__products__product {
-  height: 15vh;
+  height: 17vh;
   width: 100%;
 }
 .cart__products__product__image {
@@ -282,17 +282,18 @@ footer ul a {
   box-shadow: 0.01em 0 0.1em 0 rgba(0, 0, 0, 0.1), 0 0 2em 0 rgba(0, 0, 0, 0.1);
 }
 .cart__products__product__content {
+  height: 100%;
   width: 50%;
 }
 .cart__products__product__content__title {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 .cart__products__product__content__text {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .cart__products__product__content__price {
   font-family: "Anton", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1rem;
   letter-spacing: 0.05em;
 }
 .cart__products__product__options__button {
@@ -320,7 +321,7 @@ footer ul a {
 .cart__products__product__remove {
   top: 0;
   right: 0;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
