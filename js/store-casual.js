@@ -21,10 +21,15 @@ let filteredProducts = new Array();
 
 let button;
 
-resetProducts(storeProductsContainer);
-filterStoreProducts();
-printStoreProducts();
-activeButtons();
+
+window.addEventListener('load', (e)=>{
+    resetProducts(storeProductsContainer);
+    filterStoreProducts();
+    printStoreProducts();
+    activeButtons();
+})
+
+
 
 optionButtons.forEach((item)=>{
     item.addEventListener('click', (e)=>{
