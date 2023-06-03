@@ -66,7 +66,7 @@ function printCartProducts(){
         });
 
         activeCartButtons();
-    
+        printTotalPrice();
     }else{
         printNoProductsInCart();
     }   
@@ -111,6 +111,7 @@ function activeCartButtons(){
                 quantityText.textContent = `${cartPorductChanging.quantity}`;
             
                 displayCartCount();
+                updateTotalPrice();
             })
         })
 
@@ -132,6 +133,7 @@ function activeCartButtons(){
                 quantityText.textContent = `${cartPorductChanging.quantity}`;
             
                 displayCartCount();
+                updateTotalPrice();
             })
         })
 }
@@ -142,4 +144,26 @@ function printNoProductsInCart(){
         message.textContent = "No tienes productos en el carrito ♦️♦️♦️ 🤔";
         
         page.insertAdjacentElement('afterbegin', message);
+}
+
+function printTotalPrice(){
+    let buy = document.createElement("article");
+    buy.className = "d-flex justify-content-center align-items-center py-5";
+
+    buy.innerHTML = `<span class="cart__products__buy rounded-pill fw-bolder px-3 py-2">Pagar $${getTotalPrice()}</span>`
+
+    cartProductsContainer.insertAdjacentElement('beforeend', buy);
+}
+
+function updateTotalPrice(){
+    let buy = document.querySelector(".cart__products__buy");
+
+    buy.textContent = `Pagar $${getTotalPrice()}`
+}
+
+function getTotalPrice(){
+    return cart.reduce((sum, element)=>{
+        return element.quantity > 1 ? sum += element.price * element.quantity : 
+            sum += element.price;
+    }, 0);
 }
