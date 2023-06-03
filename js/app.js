@@ -144,12 +144,18 @@ function resetProducts(parentContainer){
 }
 
 function displayCartCount(){
+    let quantityCart = document.querySelector(".navi__count");
     if(cart.length > 0){
-        let quantityCart = document.querySelector(".navi__count");
         quantityCart.classList.add("pop");    
         quantityCart.textContent = "" + cart.reduce((sum, element)=>{
-            return sum += element.quantity;
+            if(element && true){
+                return sum += element.quantity;
+            }
+            return sum += 0;
         }, 0);
+    }
+    else{
+        quantityCart.classList.remove("pop");
     }
 }
 
@@ -167,7 +173,9 @@ function getCart(){
     let cartWithObjects = JSON.parse(sessionStorage.getItem("cart"));
 
     cartWithObjects?.forEach((element)=>{
-        cartWithRealProducts.push(parseToProduct(element));
+        if(element != null){
+            cartWithRealProducts.push(parseToProduct(element));
+        }
     });
 
     return cartWithRealProducts || new Array();
