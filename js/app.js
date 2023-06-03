@@ -188,3 +188,35 @@ function parseToProduct({id, model, description, brand, price, stars,
     return new Product(id, model, description, brand, price, stars,
             image, quantity)
 }
+
+
+//cart functions
+
+function saveCart(updatedCart){
+    console.log(updatedCart);
+    sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+}
+
+function getCart(){
+    let cartWithRealProducts = [];
+
+    let cartWithObjects = JSON.parse(sessionStorage.getItem("cart"));
+
+    console.log(cartWithObjects);
+
+    for(const object of cartWithObjects){
+        let product = parseToProduct(object);
+        console.log(product)
+        cartWithRealProducts.push(product);
+    }
+
+    return cartWithRealProducts || new Array();
+}
+
+//id, model, description, brand,  price, stars, image, quantity = 0
+function parseToProduct({id, model, description, brand, price, stars,
+    image, quantity}){
+    
+    return new Product(id, model, description, brand, price, stars,
+            image, quantity)
+}
