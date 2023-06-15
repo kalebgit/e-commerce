@@ -92,30 +92,50 @@ class Product{
     }
 }
 
-let products = [new Product(101, "Air Jordan 1 Mid SE", "CABALLEROS", "AIR ORDAN", 3299, "por definir", 
-    "../media/img/store/products/jordan-1-hombre.webp"),
-new Product(102, "Air Jordan 1 Mid SE", "DAMAS", "AIR JORDAN", 3299, "por definir", 
-    "../media/img/store/products/jordan-1-mujer.jpeg"),
-new Product(103, "Nike Air Force 1 Shadow", "DAMAS", "AIR JORDAN", 3199, "por definir", 
-    "../media/img/store/products/nike-air-froce-shadow.webp"),
-new Product(104, "Sudadera Jordan Air Garden", "NIÑOS", "AIR JORDAN", 1499, "por definir", 
-    "../media/img/store/products/sudadera-jordan-garden.jpg"),
-new Product(105, "Sudadera Puma Semana Santa", "DAMAS", "PUMA", 1499, "por definir", 
-    "../media/img/store/products/sudadera-puma-semana-santa.jpg"),
-new Product(106, "Sudadera Adidas Crew", "DAMAS", "ADIDAS", 1699, "por definir", 
-    "../media/img/store/products/sudadera-adidas-crew.jpg"),
-new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/sudadera-puma-easter.jpg"),
-new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
-new Product(109, "Tenis Adidas Nizza x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
-    "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
-new Product(110, "Gorra New Era Yankees Sakura", "CABALLEROS", "NEW ERA", 1049, "por definir",
-    "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
-new Product(111, "Sudadera Puma Classics Gen", "NIÑOS", "PUMA", 1149, "por definir", 
-    "../media/img/store/products/sudadera-puma-classics-gen.jpg"), 
-new Product(112, "Sudadera Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/sudadera-puma-ragged-priest.jpg"),]
+let products = new Array();
+
+// [new Product(101, "Air Jordan 1 Mid SE", "CABALLEROS", "AIR ORDAN", 3299, "por definir", 
+//     "../media/img/store/products/jordan-1-hombre.webp"),
+// new Product(102, "Air Jordan 1 Mid SE", "DAMAS", "AIR JORDAN", 3299, "por definir", 
+//     "../media/img/store/products/jordan-1-mujer.jpeg"),
+// new Product(103, "Nike Air Force 1 Shadow", "DAMAS", "AIR JORDAN", 3199, "por definir", 
+//     "../media/img/store/products/nike-air-froce-shadow.webp"),
+// new Product(104, "Sudadera Jordan Air Garden", "NIÑOS", "AIR JORDAN", 1499, "por definir", 
+//     "../media/img/store/products/sudadera-jordan-garden.jpg"),
+// new Product(105, "Sudadera Puma Semana Santa", "DAMAS", "PUMA", 1499, "por definir", 
+//     "../media/img/store/products/sudadera-puma-semana-santa.jpg"),
+// new Product(106, "Sudadera Adidas Crew", "DAMAS", "ADIDAS", 1699, "por definir", 
+//     "../media/img/store/products/sudadera-adidas-crew.jpg"),
+// new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/sudadera-puma-easter.jpg"),
+// new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
+// new Product(109, "Tenis Adidas Nizza x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
+//     "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
+// new Product(110, "Gorra New Era Yankees Sakura", "CABALLEROS", "NEW ERA", 1049, "por definir",
+//     "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
+// new Product(111, "Sudadera Puma Classics Gen", "NIÑOS", "PUMA", 1149, "por definir", 
+//     "../media/img/store/products/sudadera-puma-classics-gen.jpg"), 
+// new Product(112, "Sudadera Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/sudadera-puma-ragged-priest.jpg")]
+
+// funcion async para obtener productos
+
+async function fetchProducts(){
+    const response = await fetch("../datos/products.json");
+    if(!(response.ok === true)){
+        throw new Error("Error al recuperar la informacion");
+    }else{
+        let data = await response.json();
+
+        for(const object of data){
+            products.push(parseToProduct(object));
+        }
+        console.log(products);
+
+    }
+
+}
 
 
 // Arreglo de wishlist
@@ -131,6 +151,7 @@ window.addEventListener('beforeunload', ()=>{
 });
 
 window.addEventListener('load', ()=>{
+    fetchProducts();
     cart = getCart();
     console.log(cart);
     displayCartCount();
