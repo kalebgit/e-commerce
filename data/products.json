@@ -1,0 +1,122 @@
+[
+    {
+        "id":101,
+        "model":"Air Jordan 1 Mid SE",
+        "description":"CABALLEROS",
+        "brand":"AIR ORDAN",
+        "price":3299,
+        "stars":"por definir",
+        "image":"../media/img/store/products/jordan-1-hombre.webp",
+        "quanity": 0
+    },
+    {
+        "id":102,
+        "model":"Air Jordan 1 Mid SE",
+        "description":"DAMAS",
+        "brand":"AIR JORDAN",
+        "price":3299,
+        "stars":"por definir",
+        "image":"../media/img/store/products/jordan-1-mujer.jpeg",
+        "quanity": 0
+    },
+    {
+        "id":103,
+        "model":"Nike Air Force 1 Shadow",
+        "description":"DAMAS",
+        "brand":"AIR JORDAN",
+        "price":3199,
+        "stars":"por definir",
+        "image":"../media/img/store/products/nike-air-froce-shadow.webp",
+        "quanity": 0
+    },
+    {
+        "id":104,
+        "model":"Sudadera Jordan Air Garden",
+        "description":"NIÑOS",
+        "brand":"AIR JORDAN",
+        "price":1499,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-jordan-garden.jpg",
+        "quanity": 0
+    },
+    {
+        "id":105,
+        "model":"Sudadera Puma Semana Santa",
+        "description":"DAMAS",
+        "brand":"PUMA",
+        "price":1499,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-puma-semana-santa.jpg",
+        "quanity": 0
+    },
+    {
+        "id":106,
+        "model":"Sudadera Adidas Crew",
+        "description":"DAMAS",
+        "brand":"ADIDAS",
+        "price":1699,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-adidas-crew.jpg",
+        "quanity": 0
+    },
+    {
+        "id":107,
+        "model":"Sudadera Puma Easter",
+        "description":"CABALLEROS",
+        "brand":"PUMA",
+        "price":1799,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-puma-easter.jpg",
+        "quanity": 0
+    },
+    {
+        "id":108,
+        "model":"Pantalón Puma X The Ragged Priest",
+        "description":"DAMAS",
+        "brand":"PUMA",
+        "price":1799,
+        "stars":"por definir",
+        "image":"../media/img/store/products/pantalon-puma-ragged-priest.jpg",
+        "quanity": 0
+    },
+    {
+        "id":109,
+        "model":"Tenis Adidas Nizza x Hello Kitty",
+        "description":"DAMAS",
+        "brand":"ADIDAS",
+        "price":2199,
+        "stars":"por definir",
+        "image":"../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp",
+        "quanity": 0
+    },
+    {
+        "id":110,
+        "model":"Gorra New Era Yankees Sakura",
+        "description":"CABALLEROS",
+        "brand":"NEW ERA",
+        "price":1049,
+        "stars":"por definir",
+        "image":"../media/img/store/products/gorra-new-era-yankees-sakura.jpg",
+        "quanity": 0
+    },
+    {
+        "id":111,
+        "model":"Sudadera Puma Classics Gen",
+        "description":"NIÑOS",
+        "brand":"PUMA",
+        "price":1149,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-puma-classics-gen.jpg",
+        "quanity": 0
+    },
+    {
+        "id":112,
+        "model":"Sudadera Puma X The Ragged Priest",
+        "description":"DAMAS",
+        "brand":"PUMA",
+        "price":1799,
+        "stars":"por definir",
+        "image":"../media/img/store/products/sudadera-puma-ragged-priest.jpg",
+        "quanity": 0
+    }
+]

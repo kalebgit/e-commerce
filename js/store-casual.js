@@ -25,8 +25,8 @@ let button;
 window.addEventListener('load', (e)=>{
     resetProducts(storeProductsContainer);
     filterStoreProducts();
-    printStoreProducts();
-    activeButtons();
+    setTimeout(printStoreProducts, 200);
+    setTimeout(activeButtons, 202);
 })
 
 

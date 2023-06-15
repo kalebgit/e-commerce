@@ -92,30 +92,62 @@ class Product{
     }
 }
 
-let products = [new Product(101, "Air Jordan 1 Mid SE", "CABALLEROS", "AIR ORDAN", 3299, "por definir", 
-    "../media/img/store/products/jordan-1-hombre.webp"),
-new Product(102, "Air Jordan 1 Mid SE", "DAMAS", "AIR JORDAN", 3299, "por definir", 
-    "../media/img/store/products/jordan-1-mujer.jpeg"),
-new Product(103, "Nike Air Force 1 Shadow", "DAMAS", "AIR JORDAN", 3199, "por definir", 
-    "../media/img/store/products/nike-air-froce-shadow.webp"),
-new Product(104, "Sudadera Jordan Air Garden", "NIÑOS", "AIR JORDAN", 1499, "por definir", 
-    "../media/img/store/products/sudadera-jordan-garden.jpg"),
-new Product(105, "Sudadera Puma Semana Santa", "DAMAS", "PUMA", 1499, "por definir", 
-    "../media/img/store/products/sudadera-puma-semana-santa.jpg"),
-new Product(106, "Sudadera Adidas Crew", "DAMAS", "ADIDAS", 1699, "por definir", 
-    "../media/img/store/products/sudadera-adidas-crew.jpg"),
-new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/sudadera-puma-easter.jpg"),
-new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
-new Product(109, "Tenis Adidas Nizza x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
-    "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
-new Product(110, "Gorra New Era Yankees Sakura", "CABALLEROS", "NEW ERA", 1049, "por definir",
-    "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
-new Product(111, "Sudadera Puma Classics Gen", "NIÑOS", "PUMA", 1149, "por definir", 
-    "../media/img/store/products/sudadera-puma-classics-gen.jpg"), 
-new Product(112, "Sudadera Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
-    "../media/img/store/products/sudadera-puma-ragged-priest.jpg"),]
+let products = new Array();
+
+// [new Product(101, "Air Jordan 1 Mid SE", "CABALLEROS", "AIR ORDAN", 3299, "por definir", 
+//     "../media/img/store/products/jordan-1-hombre.webp"),
+// new Product(102, "Air Jordan 1 Mid SE", "DAMAS", "AIR JORDAN", 3299, "por definir", 
+//     "../media/img/store/products/jordan-1-mujer.jpeg"),
+// new Product(103, "Nike Air Force 1 Shadow", "DAMAS", "AIR JORDAN", 3199, "por definir", 
+//     "../media/img/store/products/nike-air-froce-shadow.webp"),
+// new Product(104, "Sudadera Jordan Air Garden", "NIÑOS", "AIR JORDAN", 1499, "por definir", 
+//     "../media/img/store/products/sudadera-jordan-garden.jpg"),
+// new Product(105, "Sudadera Puma Semana Santa", "DAMAS", "PUMA", 1499, "por definir", 
+//     "../media/img/store/products/sudadera-puma-semana-santa.jpg"),
+// new Product(106, "Sudadera Adidas Crew", "DAMAS", "ADIDAS", 1699, "por definir", 
+//     "../media/img/store/products/sudadera-adidas-crew.jpg"),
+// new Product(107, "Sudadera Puma Easter", "CABALLEROS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/sudadera-puma-easter.jpg"),
+// new Product(108, "Pantalón Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/pantalon-puma-ragged-priest.jpg"),
+// new Product(109, "Tenis Adidas Nizza x Hello Kitty", "DAMAS", "ADIDAS", 2199, "por definir", 
+//     "../media/img/store/products/tenis-adidas-nizza-platform-hello-kitty.webp"),
+// new Product(110, "Gorra New Era Yankees Sakura", "CABALLEROS", "NEW ERA", 1049, "por definir",
+//     "../media/img/store/products/gorra-new-era-yankees-sakura.jpg"),
+// new Product(111, "Sudadera Puma Classics Gen", "NIÑOS", "PUMA", 1149, "por definir", 
+//     "../media/img/store/products/sudadera-puma-classics-gen.jpg"), 
+// new Product(112, "Sudadera Puma X The Ragged Priest", "DAMAS", "PUMA", 1799, "por definir", 
+//     "../media/img/store/products/sudadera-puma-ragged-priest.jpg")]
+
+// funcion async para obtener productos
+
+class Client{
+    constructor({userName, password}){
+        this.userName = userName;
+        this.password = password;
+    }
+}
+
+
+
+let accounts = new Array()[new Client("emilianokaleb", "emi0809"),
+                new Client("andresjim", "jim0216")];
+
+async function fetchProducts(){
+    const response = await fetch("../datos/products.json");
+    if(!(response.ok === true)){
+        throw new Error("Error al recuperar la informacion");
+    }else{
+        let data = await response.json();
+
+        for(const object of data){
+            products.push(parseToProduct(object));
+        }
+        console.log(products);
+
+    }
+
+}
 
 
 // Arreglo de wishlist
@@ -128,12 +160,18 @@ let cart = new Array();
 
 window.addEventListener('beforeunload', ()=>{
     saveCart(cart);
+    saveAccounts(accounts);
 });
 
 window.addEventListener('load', ()=>{
+    fetchProducts();
     cart = getCart();
     console.log(cart);
     displayCartCount();
+
+    accounts = getAccounts();
+    console.log(accounts);
+
 })
 
 function resetProducts(parentContainer){
@@ -190,33 +228,39 @@ function parseToProduct({id, model, description, brand, price, stars,
 }
 
 
-//cart functions
 
-function saveCart(updatedCart){
-    console.log(updatedCart);
-    sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+
+/*
+    ==========================================
+        LOGIN AND REGISTER
+    ==========================================
+*/
+
+
+
+let savedAccount;
+
+let loginButtons = document.querySelectorAll(".account-login");
+loginButtons.forEach((element)=>{
+    element.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+    })
+})
+
+// guardar cuentas
+function saveAccounts(updatedAccounts){
+    localStorage.setItem("accounts", JSON.stringify(updatedAccounts));
 }
 
-function getCart(){
-    let cartWithRealProducts = [];
+function getAccounts(){
+    let realAccounts = new Array();
+    let temporal = JSON.parse(localStorage.getItem("accounts"));
+    console.log(`Temporal: ${temporal}`);
 
-    let cartWithObjects = JSON.parse(sessionStorage.getItem("cart"));
+    temporal && tempral.forEach((element)=>{
+        realAccounts.push(new Client(element));
+    })
 
-    console.log(cartWithObjects);
-
-    for(const object of cartWithObjects){
-        let product = parseToProduct(object);
-        console.log(product)
-        cartWithRealProducts.push(product);
-    }
-
-    return cartWithRealProducts || new Array();
-}
-
-//id, model, description, brand,  price, stars, image, quantity = 0
-function parseToProduct({id, model, description, brand, price, stars,
-    image, quantity}){
-    
-    return new Product(id, model, description, brand, price, stars,
-            image, quantity)
+    return realAccounts || new Array();
 }
