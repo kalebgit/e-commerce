@@ -362,4 +362,8 @@ footer ul a {
   min-height: 100vh;
 }
 
+.blur {
+  filter: blur(0.5rem);
+}
+
 /*# sourceMappingURL=styles.css.map */

@@ -39,10 +39,14 @@ userButton.addEventListener('click', (e)=>{
 let close = [...document.querySelectorAll(".home__form__icon-close")];
 let registerForm = document.querySelector(".register");
 let loginForm = document.querySelector(".login");
+let pageContent = [...document.querySelectorAll(".main__content")];
 
 close.forEach((item)=>{
     item.addEventListener('click', (e)=>{
         item.parentElement.parentElement.classList.remove("popup");
+        pageContent.forEach((element)=>{
+            element.classList.remove("blur");
+        });
     })
 });
 
@@ -52,6 +56,10 @@ openRegister.forEach((item)=>{
     item.addEventListener('click', (e)=>{
         loginForm.classList.remove("popup");
         registerForm.classList.add("popup");
+
+        pageContent.forEach((element)=>{
+            element.classList.add("blur");
+        });
     })
 });
 
@@ -61,6 +69,10 @@ openLogin.forEach((item)=>{
     item.addEventListener('click', (e)=>{
         registerForm.classList.remove("popup");
         loginForm.classList.add("popup");   
+        
+        pageContent.forEach((element)=>{
+            element.classList.add("blur");
+        });
     })
 });
 
