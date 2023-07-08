@@ -330,6 +330,10 @@ footer ul a {
   font-size: 1.5rem;
 }
 
+.product-presentation {
+  min-height: 100vh;
+}
+
 .rotate {
   transform: rotate(0.25turn);
 }
