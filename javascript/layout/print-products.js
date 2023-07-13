@@ -1,11 +1,15 @@
 /*
     ==========================================
-        SORT SYSTEM
+        PRINTINT PRODUCTS
     ==========================================
 */
-let storeProductsContainer = document.querySelector(".store__products");
 
-let options = { 
+import * as variables from '../global/variables.js';
+import * as functions from '../global/functions.js';
+
+export let storeProductsContainer = document.querySelector(".store__products");
+
+export let options = { 
     all: true,
     // brand: false,
     descendant: false,
@@ -15,134 +19,41 @@ let options = {
     men: false
 }
 
-let optionButtons = [...document.querySelectorAll(".store__options__item")];
+export let optionButtons = [...document.querySelectorAll(".store__options__item")];
 
-let filteredProducts = new Array();
+export let filteredProducts = new Array();
 
-let button;
-
-
-window.addEventListener('load', (e)=>{
-    resetProducts(storeProductsContainer);
-    filterStoreProducts();
-    setTimeout(printStoreProducts, 200);
-    setTimeout(activeButtons, 202);
-})
-
-
-
-optionButtons.forEach((item)=>{
-    item.addEventListener('click', (e)=>{
-        item.classList.toggle("store__options__item-pressed");
-        if(item.className.includes("store__options__item-pressed")){
-            switch(item.getAttribute("id")){
-                case "all":
-                    options.all = true;
-                    break;
-                // case "brand":
-                //     options.brand = true;
-                //     break;
-                case "descendant":
-                    options.descendant = true;
-                    options.ascendant = false;
-                    button = document.getElementById("ascendant");
-                    button.classList.remove("store__options__item-pressed");
-                    break;
-                case "ascendant":
-                    options.ascendant = true;
-                    options.descendant = false;
-
-                    button = document.getElementById("descendant");
-                    button.classList.remove("store__options__item-pressed");
-                    break;
-                case "kids":
-                    options.kids = true;
-                    options.women = false;
-                    button = document.getElementById("women");
-                    button.classList.remove("store__options__item-pressed");
-                    options.men = false;
-                    button = document.getElementById("men");
-                    button.classList.remove("store__options__item-pressed");
-                    break;
-                case "women":
-                    options.women = true;
-                    options.kids = false;
-                    button = document.getElementById("kids");
-                    button.classList.remove("store__options__item-pressed");
-                    options.men = false;
-                    button = document.getElementById("men");
-                    button.classList.remove("store__options__item-pressed");
-                    break;
-                case "men":
-                    options.men = true;
-                    options.kids = false;
-                    button = document.getElementById("kids");
-                    button.classList.remove("store__options__item-pressed");
-                    options.women = false;
-                    button = document.getElementById("women");
-                    button.classList.remove("store__options__item-pressed");
-                    break;
-                default:
-                    break;
-            }
-        }else{
-                switch(item.getAttribute("id")){
-                    case "all":
-                        options.all = false;
-                        break;
-                    case "descendant":
-                        options.descendant = false;
-                        break;
-                    case "ascendant":
-                        options.ascendant = false;
-                        break;
-                    case "kids":
-                        options.kids = false;
-                        break;
-                    case "women":
-                        options.women = false;
-                        break;
-                    case "men":
-                        options.men = false;
-                        break;
-                    default:
-                        break;
-            }
-        }
-
-        resetProducts(storeProductsContainer);
-        filterStoreProducts();
-        printStoreProducts();
-        activeButtons();
+export function resetProducts(parentContainer){
+    let containerChildren = [...parentContainer.children]
+    containerChildren.forEach((item)=>{
+        item.remove();
     });
-});
+}
 
-
-
-function filterStoreProducts(){
+export function filterStoreProducts(){
     if(options.all){
         console.log("se ingresa a all");
-        filteredProducts = products;
+        filteredProducts = variables.products;
     }
 
     
     if(options.kids){
         console.log("se ingresa a kids");
-        filteredProducts = products.map((item)=>{
+        filteredProducts = variables.products.map((item)=>{
             if(item.description == "NIÑOS"){
                 return item;
             }
         });
     }else if(options.women){
         console.log("se ingresa a women");
-        filteredProducts = products.map((item)=>{
+        filteredProducts = variables.products.map((item)=>{
             if(item.description == "DAMAS"){
                 return item;
             }
         })
     }else if(options.men){
         console.log("se ingresa a men");
-        filteredProducts = products.map((item)=>{
+        filteredProducts = variables.products.map((item)=>{
             if(item.description == "CABALLEROS"){
                 return item;
             }
@@ -180,8 +91,8 @@ function filterStoreProducts(){
     }
 }
 
-function printStoreProducts(){
-    lastProducts = new Array();
+export function printStoreProducts(){
+    let lastProducts = new Array();
     filteredProducts.forEach((item)=>{
         if(item != undefined){
             lastProducts.push(item);
@@ -223,7 +134,7 @@ function printStoreProducts(){
 }
 
 
-function activeButtons(){
+export function activeButtons(){
     /*
         ==============================
             WISHLIST
@@ -287,27 +198,8 @@ function activeButtons(){
 
     addCart.forEach((item)=>{
         item.addEventListener('click', (e)=>{
-            let newCartProduct = products.find((element)=>{
-                if(parseInt(item.getAttribute("id")) === element.id){
-                    return element;
-                }
-            }).clone();
-
-            
-
-            if(cart.some((product)=>newCartProduct.equals(product))){
-                cart.forEach((product)=>{
-                    if(newCartProduct.equals(product)){
-                        product.quantity++;
-                    }
-                });
-            }else{
-                newCartProduct.quantity++;
-                cart.unshift(newCartProduct);
-            }
-            
-            displayCartCount();
+            variables.sale.addProduct(variables.products.find((element)=>element.id == item.getAttribute("id")));
+            functions.displayCartCount();
         });
     });
 }
-
