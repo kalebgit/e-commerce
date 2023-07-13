@@ -1,40 +1,23 @@
 /*
     ==========================================
-        CART
+        PRINT SALE CART
     ==========================================
 */
+import * as variables from '../global/variables.js';
+import * as functions from '../global/functions.js';
+import {resetProducts} from '../layout/print-products.js';
 
-let cartProductsContainer = document.querySelector(".cart__products")
-cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-content-start align-items-center";
+export let cartProductsContainer = document.querySelector(".cart__products");
 
-let removeButtons;
-let removeQuantity;
-let addQuantity;
+export let removeButtons;
+export let removeQuantity;
+export let addQuantity;
 
-let page = document.querySelector(".cart");
-window.addEventListener('load', ()=>{
-    
-    
-        page.classList.add("full-screen");
-    if(cart.length > 0){
-        printCartProducts();
-    }else{
-        
-        printNoProductsInCart();
-        
-    }
-})
+export let page = document.querySelector(".cart");
 
-
-function filterCartProducts(node){
-    cart = cart.filter((product)=>product.id != parseInt(node.getAttribute("id")))
-
-    console.log(cart);  
-}
-
-function printCartProducts(){
-    if(cart.length > 0){
-        cart.forEach((cartProduct)=>{
+export function printCartProducts(){
+    if(variables.sale.productsAdded.length > 0){
+        variables.sale.productsAdded.forEach((cartProduct)=>{
             let element = document.createElement("article");
             element.className = "cart__products__product d-flex flex-row flex-nowrap justify-content-start align-items-start position-relative p-4 gap-4";
         
@@ -72,7 +55,7 @@ function printCartProducts(){
     }   
 }
 
-function activeCartButtons(){
+export function activeCartButtons(){
         removeButtons = document.querySelectorAll(".remove-cart");
 
         removeQuantity = document.querySelectorAll(".remove-quantity");
@@ -82,9 +65,9 @@ function activeCartButtons(){
         removeButtons.forEach((item)=>{
             item.addEventListener('click', (e)=>{
         
-                filterCartProducts(item);
+                variables.sale.deleteProduct(parseInt(item.getAttribute("id")));
                 
-                displayCartCount();
+                functions.displayCartCount();
 
                 resetProducts(cartProductsContainer);
         
@@ -96,21 +79,12 @@ function activeCartButtons(){
         removeQuantity.forEach((item)=>{
             console.log(item.getAttribute("id"));
             item.addEventListener('click', (e)=>{
-                let cartPorductChanging = cart.find((element)=>{
-                    return element.id == item.getAttribute("id");
-                })
-
-                console.log(cartPorductChanging);
-
-                if(cartPorductChanging.quantity > 1){
-                    cartPorductChanging.quantity--;
-                }
-                
-
+                variables.sale.removeQuantity(parseInt(item.getAttribute("id")));
                 let quantityText = item.nextElementSibling;
-                quantityText.textContent = `${cartPorductChanging.quantity}`;
+                quantityText.textContent = `${variables.sale.find((product)=>product.id ==
+                    parseInt(item.getAttribute("id"))).quantity}`;
             
-                displayCartCount();
+                functions.displayCartCount();
                 updateTotalPrice();
             })
         })
@@ -119,26 +93,19 @@ function activeCartButtons(){
         addQuantity.forEach((item)=>{
             console.log(item.getAttribute("id"));
             item.addEventListener('click', (e)=>{
-                let cartPorductChanging = cart.find((element)=>{
-                    return element.id == item.getAttribute("id");
-                })
-
-                console.log(cartPorductChanging);
-
-                if(cartPorductChanging.quantity < 15){
-                    cartPorductChanging.quantity++;
-                }
+                variables.sale.addQuantity(parseInt(item.getAttribute("id")));
 
                 let quantityText = item.previousElementSibling;
-                quantityText.textContent = `${cartPorductChanging.quantity}`;
+                quantityText.textContent = `${variables.sale.find((product)=>product.id ==
+                    parseInt(item.getAttribute("id"))).quantity}`;
             
-                displayCartCount();
+                functions.displayCartCount();
                 updateTotalPrice();
             })
         })
 }
 
-function printNoProductsInCart(){
+export function printNoProductsInCart(){
     let message = document.createElement("p");
         message.className = "cart__products__message fw-bolder p-5";
         message.textContent = "No tienes productos en el carrito ♦️♦️♦️ 🤔";
@@ -146,24 +113,17 @@ function printNoProductsInCart(){
         page.insertAdjacentElement('afterbegin', message);
 }
 
-function printTotalPrice(){
+export function printTotalPrice(){
     let buy = document.createElement("article");
     buy.className = "d-flex justify-content-center align-items-center py-5";
 
-    buy.innerHTML = `<span class="cart__products__buy rounded-pill fw-bolder px-3 py-2">Pagar $${getTotalPrice()}</span>`
+    buy.innerHTML = `<span class="cart__products__buy rounded-pill fw-bolder px-3 py-2">Pagar $${variables.sale.getTotalPrice()}</span>`
 
     cartProductsContainer.insertAdjacentElement('beforeend', buy);
 }
 
-function updateTotalPrice(){
+export function updateTotalPrice(){
     let buy = document.querySelector(".cart__products__buy");
 
-    buy.textContent = `Pagar $${getTotalPrice()}`
-}
-
-function getTotalPrice(){
-    return cart.reduce((sum, element)=>{
-        return element.quantity > 1 ? sum += element.price * element.quantity : 
-            sum += element.price;
-    }, 0);
+    buy.textContent = `Pagar $${variables.sale.getTotalPrice()}`
 }
