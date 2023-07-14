@@ -28,6 +28,7 @@ accountforms.close.forEach((item)=>{
         item.parentElement.parentElement.classList.remove("popup");
         accountforms.pageContent.forEach((element)=>{
             element.classList.remove("blur");
+            element.classList.remove("disabled");
         });
     })
 });
@@ -39,6 +40,7 @@ accountforms.openRegister.forEach((item)=>{
 
         accountforms.pageContent.forEach((element)=>{
             element.classList.add("blur");
+            element.classList.add("disabled");
         });
     })
 });
@@ -50,6 +52,7 @@ accountforms.openLogin.forEach((item)=>{
         
         accountforms.pageContent.forEach((element)=>{
             element.classList.add("blur");
+            element.classList.add("disabled");
         });
     })
 });
@@ -59,15 +62,28 @@ accountforms.openLogin.forEach((item)=>{
 
 //page events
 window.addEventListener('beforeunload', ()=>{
-    functions.saveSale(variables.sale);
+    sessionStorage.setItem("cart", JSON.stringify(variables.sale));
 });
 
 window.addEventListener('load', ()=>{
     functions.fetchProducts();
-    variables.sale.productsAdded = functions.getSale();
+    let object = JSON.parse(sessionStorage.getItem("cart"));
+    if(object){
+        for(let element of object.productsAdded){
+            element && variables.sale.productsAdded.push({id: element.id, quantity: element.quantity});
+        }
+    }
     functions.displayCartCount();
-    console.log(variables.sale);
+    
     
 })
+
+function guardarInfo(){
+    sessionStorage.setItem("sale", JSON.stringify(variables.sale));
+}
+
+function obtenerInfo(){
+    JSON.parse(sessionStorage.getItem("sale"));
+}
 
 

@@ -17,32 +17,34 @@ export let page = document.querySelector(".cart");
 
 export function printCartProducts(){
     if(variables.sale.productsAdded.length > 0){
-        variables.sale.productsAdded.forEach((cartProduct)=>{
+        variables.sale.productsAdded.forEach((saleProduct)=>{
+            let productInfo = variables.products.find((item)=>saleProduct.id == item.id);
+            console.log(productInfo);
             let element = document.createElement("article");
             element.className = "cart__products__product d-flex flex-row flex-nowrap justify-content-start align-items-start position-relative p-4 gap-4";
         
             element.innerHTML = `
-            <img src="${cartProduct.image}"
-            alt="${cartProduct.model}"
+            <img src="${productInfo.image}"
+            alt="${productInfo.model}"
             class="cart__products__product__image img-thumbnail">
             <div class="cart__products__product__content d-flex flex-column flex-nowrap 
                 justify-content-between align-items-start">
-                    <h2 class="cart__products__product__content__title fw-bolder m-0">${cartProduct.model}</h2>
-                    <p class="cart__products__product__content__text m-0">${cartProduct.brand} - ${cartProduct.description}</p>
-                    <p class="cart__products__product__content__price m-0">$${cartProduct.price}</p>
+                    <h2 class="cart__products__product__content__title fw-bolder m-0">${productInfo.model}</h2>
+                    <p class="cart__products__product__content__text m-0">${productInfo.brand} - ${productInfo.description}</p>
+                    <p class="cart__products__product__content__price m-0">$${productInfo.price}</p>
             </div>
             <div class="cart__products__product__options align-self-end d-flex flex-row
                 flex-nowrap justify-content-center gap-3">
-                    <button id="${cartProduct.id}" class="cart__products__product__options__button 
+                    <button id="${saleProduct.id}" class="cart__products__product__options__button 
                         cart__products__product__options__button--white fw-bolder
                         d-flex justify-content-center align-items-center remove-quantity">–</button>
-                    <p class="cart__products__product__options__text">${cartProduct.quantity}</p>
-                    <button id="${cartProduct.id}" class="cart__products__product__options__button fw-bolder
+                    <p class="cart__products__product__options__text">${saleProduct.quantity}</p>
+                    <button id="${saleProduct.id}" class="cart__products__product__options__button fw-bolder
                         d-flex justify-content-center align-items-center add-quantity">
                         +</button>
             </div>
         
-            <ion-icon name="close-outline" id="${cartProduct.id}" class="position-absolute 
+            <ion-icon name="close-outline" id="${saleProduct.id}" class="position-absolute 
                 cart__products__product__remove p-4 remove-cart"></ion-icon>`
         
             cartProductsContainer.insertAdjacentElement('beforeend', element);
@@ -81,7 +83,7 @@ export function activeCartButtons(){
             item.addEventListener('click', (e)=>{
                 variables.sale.removeQuantity(parseInt(item.getAttribute("id")));
                 let quantityText = item.nextElementSibling;
-                quantityText.textContent = `${variables.sale.find((product)=>product.id ==
+                quantityText.textContent = `${variables.sale.productsAdded.find((product)=>product.id ==
                     parseInt(item.getAttribute("id"))).quantity}`;
             
                 functions.displayCartCount();
@@ -93,10 +95,10 @@ export function activeCartButtons(){
         addQuantity.forEach((item)=>{
             console.log(item.getAttribute("id"));
             item.addEventListener('click', (e)=>{
-                variables.sale.addQuantity(parseInt(item.getAttribute("id")));
+                variables.sale.addProduct(parseInt(item.getAttribute("id")));
 
                 let quantityText = item.previousElementSibling;
-                quantityText.textContent = `${variables.sale.find((product)=>product.id ==
+                quantityText.textContent = `${variables.sale.productsAdded.find((product)=>product.id ==
                     parseInt(item.getAttribute("id"))).quantity}`;
             
                 functions.displayCartCount();
@@ -126,4 +128,9 @@ export function updateTotalPrice(){
     let buy = document.querySelector(".cart__products__buy");
 
     buy.textContent = `Pagar $${variables.sale.getTotalPrice()}`
+}
+
+export async function print(){
+    await functions.fetchProducts();
+    printCartProducts();
 }

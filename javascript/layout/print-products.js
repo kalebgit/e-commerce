@@ -198,7 +198,7 @@ export function activeButtons(){
 
     addCart.forEach((item)=>{
         item.addEventListener('click', (e)=>{
-            variables.sale.addProduct(variables.products.find((element)=>element.id == item.getAttribute("id")));
+            variables.sale.addProduct(variables.products.find((element)=>element.id == item.getAttribute("id")).id);
             functions.displayCartCount();
         });
     });

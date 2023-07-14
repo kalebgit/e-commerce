@@ -4,9 +4,10 @@
     ==========================================
 */
 import * as variables from '../global/variables.js'
+import {Sale} from '../global/classes.js';
 
 export async function fetchProducts(){
-    const response = await fetch("../datos/products.json");
+    const response = await fetch("../data/products.json");
     if(!(response.ok === true)){
         throw new Error("Error al recuperar la informacion");
     }else{
@@ -17,6 +18,7 @@ export async function fetchProducts(){
         }
         console.log(variables.products);
     }
+    return Promise.resolve();
 }
 
 
@@ -35,16 +37,4 @@ export function displayCartCount(){
     else{
         quantityCart.classList.remove("pop");
     }
-}
-
-
-//cart functions
-
-export function savaSale(updatedSale){
-    console.log(updatedSale);
-    sessionStorage.setItem("cart", JSON.stringify(updatedSale));
-}
-
-export function getSale(){
-    return JSON.parse(sessionStorage.getItem("cart"))?.productsAdded || new Array();
 }

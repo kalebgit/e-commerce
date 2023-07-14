@@ -50,14 +50,15 @@ export class Sale{
     deleteProduct(productToRemoveID){
         for(let i = 0; i < this.productsAdded.length; i++){
             if(productToRemoveID == this.productsAdded[i].id){
-                this.productsAdded[i].splice(i, 1);
+                this.productsAdded.splice(i, 1);
                 break;
             }
         }
     }
 
     getTotalPrice(){
-        return this.productsAdded.reduce((sum, element)=> element && true ? sum += 0 : 
-            sum += element.price * element.quantity, 0);
+        return this.productsAdded.reduce((sum, element)=> element && true ? 
+            sum +=  variables.products.find((item)=>item.id == element.id).price * element.quantity : 
+            sum += 0, 0);
     }
 }

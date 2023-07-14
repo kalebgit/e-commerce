@@ -11,7 +11,7 @@ sale.cartProductsContainer.className = "d-flex flex-column flex-nowrap justify-c
 window.addEventListener('load', ()=>{
     sale.page.classList.add("full-screen");
     if(variables.sale.productsAdded.length > 0){
-        sale.printCartProducts();
+        sale.print();
     }else{
         sale.printNoProductsInCart();
     }
